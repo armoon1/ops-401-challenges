@@ -1,1 +1,5 @@
 
+# Script Name:                  Uptime sensor Part 2
+# Author:                       SEYED MEHDI HASHEMI SOHI
+# Date of latest revision:      01/10/2024
+# Purpose:                      Useing ICMP packets to evaluate if hosts on the LAN are up or down
