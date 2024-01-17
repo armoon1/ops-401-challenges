@@ -1,3 +1,9 @@
+# Script Name:                  File encryption
+# Author:                       SEYED MEHDI HASHEMI SOHI
+# Date of latest revision:      01/16/2024
+# Purpose:                      File encryption
+
+
 # Import the Fernet class from the cryptography library
 from cryptography.fernet import Fernet
 import os
