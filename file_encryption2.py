@@ -2,6 +2,8 @@
 # Author:                       SEYED MEHDI HASHEMI SOHI
 # Date of latest revision:      01/17/2024
 # Purpose:                      File encryption2
+# Resources:                    chatgpt
+
 
 # Import the Fernet class from the cryptography library
 from cryptography.fernet import Fernet
