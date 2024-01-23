@@ -6,45 +6,36 @@
 # Source:                       chatgpt
 
 # Import necessary modules from Scapy library
-from scapy.all import *
+from scapy.all import IP, Ether, TCP, sr1, send, print, 
+import random 
+import sys
 
-# Function to perform TCP port scanning
-def tcp_port_scanner(target_ip, port_range):
-    # Iterate through the specified port range
-    for port in range(port_range[0], port_range[1] + 1):
-        # Craft a TCP SYN packet for the specified port
-        packet = IP(dst=target_ip) / TCP(dport=port, flags="S")
+# Define host IP
+host = "scanme.nmap.org"
 
-        # Send the packet and receive the response
-        response = sr1(packet, timeout=1, verbose=0)
 
-        # Check if a response was received
-        if response is not None:
-            # Check TCP flags in the response
-            if response.haslayer(TCP):
-                flags = response[TCP].flags
+# Define port range or specific set of ports to scan
+prt_range = [21,22,25,80,433]
 
-                # Open port (SYN-ACK received)
-                if flags == 0x12:
-                    print(f"Port {port} is open")
-                    
-                    # Send a RST packet to gracefully close the open connection
-                    rst_packet = IP(dst=target_ip) / TCP(dport=port, flags="R")
-                    send(rst_packet, verbose=0)
-                    
-                # Closed port (RST-ACK received)
-                elif flags == 0x14:
-                    print(f"Port {port} is closed")
-                    
-                # Filtered port (No response received)
-                else:
-                    print(f"Port {port} is filtered (silently dropped)")
+# define function for scanning ports
+def port_scan(dst_port):
+    src_port = random.randiant(1024, 65535)
+    response = sr1(IP(dst=host)/TCP(sport=src_port, dport=dst_port, flags="s"), timeout=1, verboe=1)
+ 
+ 
+    if response.haslayer(TCP) and response[TCP].flags == 0x12:
+            # Flag 0x12 received (SYN-ACK), send a RST packet to close the connection
+            send(IP(dst=host) / TCP(sport=src_port, dport=dst_port, flags="R"), verbose=0)
+            print(f"Port {dst_port} is open")
+    elif response.haslayer(TCP) and response[TCP].flags == 0x14:
+            # Flag 0x14 received (RST-ACK), port is closed
+            print(f"Port {dst_port} is closed")
+    else:
+            # No flag received, port is filtered and silently dropped
+            print(f"Port {dst_port} is filtered and silently dropped")
+   
+# print(f"Port {dst_port} is filtered and silently dropped")
 
-# Main execution when the script is run
-if __name__ == "__main__":
-    # Replace 'your_target_ip' and 'your_port_range' with your actual target IP and port range
-    target_ip = 'your_target_ip'
-    port_range = (1, 100)  # Example port range
-    
-    # Call the function to perform TCP port scanning
-    tcp_port_scanner(target_ip, port_range)
+# Loop through the port range and perform the scan
+for port in prt_range:
+    port_scan(port)
