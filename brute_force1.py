@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Script Name:                  Brute Force
 # Author:                       SEYED MEHDI HASHEMI SOHI
-# Date of latest revision:      01/20/2024
+# Date of latest revision:      01/29/2024
 # Purpose:                      Automated Brute Force Wordlist Attack 1
 # Source:                       chatgpt
 
