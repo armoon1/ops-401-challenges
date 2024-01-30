@@ -37,7 +37,7 @@ def main(): # defining execution function
         word_list_path = input("Enter word list file path: ")
         defensive_mode(user_input, word_list_path) # defensive_mode function either prints recognized or not recognized
     else:
-        print("Invalid mode selection.")
+        print("Invalid mode selection.") # for other situations to prevent breaking down the codes
 
 if __name__ == "__main__":
     main()
