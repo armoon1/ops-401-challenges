@@ -6,6 +6,8 @@
 # Source:                       chatgpt
 
 import time
+import nltk
+import sys
 
 def offensive_mode(word_list_path): # defining offensive mode function
     # Accepts a word list file path and iterates through the word list, printing each word with a delay.
