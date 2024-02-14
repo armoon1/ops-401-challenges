@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+# Script Name:                  
+# Author:                       SEYED MEHDI HASHEMI SOHI
+# Date of latest revision:      02/13/2024
+# Purpose:                      Event Logging Tool Part 2 of 3
+# Source:                       chatgpt
+
+import logging
+from logging.handlers import RotatingFileHandler
+
+# Create logger object 
+logger = logging.getLogger("my_logger")
+logger.setLevel(logging.INFO)
+
+# Create a rotating file handler
+handler = RotatingFileHandler("ops27.log", maxBytes=1024*1024, backupCount=5) # Set maximum file size to 1MB and keep 5 backup files
+handler.setLevel(logging.INFO)
+
+# Create formatter and add it to the handler
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+# Add the handler to the logger
+logger.addHandler(handler)
+
+def main():
+    try:
+        # Simulate some operations
+        result = 10 / 0
+    except Exception as e:
+        # Log error
+        logger.error(f"An error occurred: {e}", exc_info=True)
+
+if __name__ == "__main__":
+    main()
