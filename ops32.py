@@ -1,4 +1,9 @@
-
+#!/usr/bin/env python3
+# Script Name:                  Signature-based Malware Detection Part 2 of 3
+# Author:                       SEYED MEHDI HASHEMI SOHI
+# Date of latest revision:      02/20/2024
+# Purpose:                      Signature-based Malware Detection
+# Source:                       chatgpt
 
 
 import os
